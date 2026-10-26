@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yeşil Saat</title>
+  <meta name="description" content="Yarın elektriğin en temiz olduğu saati bul, esnek işlerini o saate kaydır." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="ust">
+    <div>
+      <h1>🌱 Yeşil Saat</h1>
+      <p class="alt" id="sehirBaslik">Şehir seçilmedi</p>
+    </div>
+    <span class="seri" id="seriRozet" title="Seri">🔥 0</span>
+  </header>
+
+  <main>
+    <!-- 1. PLANLA -->
+    <section class="sekme aktif" id="planla">
+      <div class="kart">
+        <h2>Şehir</h2>
+        <div class="hizli" id="hizliSehirler"></div>
+        <form id="sehirForm" class="satir">
+          <input id="sehirInput" placeholder="Başka bir şehir ara…" autocomplete="off" />
+          <button type="submit">Ara</button>
+        </form>
+        <p class="durum" id="havaDurum"></p>
+      </div>
+
+      <div class="kart">
+        <h2>İş</h2>
+        <div class="cihazlar" id="cihazlar"></div>
+        <div class="izgara">
+          <label>En erken<select id="aralikBas"></select></label>
+          <label>En geç bitiş<select id="aralikSon"></select></label>
+          <label>Alışılmış saat<select id="aliskanlik"></select></label>
+        </div>
+        <button class="ana" id="hesaplaBtn" disabled>En temiz saati bul</button>
+      </div>
+    </section>
+
+    <!-- 2. ÇİZELGE -->
+    <section class="sekme" id="cizelge">
+      <div class="kart">
+        <h2>Yarının temiz enerji çizelgesi</h2>
+        <p class="alt">Her saatin tahmini yenilenebilir enerji payı</p>
+        <div class="cubuklar" id="cubuklar"><p class="bos">Önce bir şehir seç.</p></div>
+        <div class="lejant">
+          <span><i class="yesil"></i>Temiz (≥%45)</span>
+          <span><i class="sari"></i>Orta</span>
+          <span><i class="kirmizi"></i>Kirli (&lt;%25)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ÖNERİ -->
+    <section class="sekme" id="oneri">
+      <div class="kart" id="oneriKart"><p class="bos">Planla sekmesinden bir iş seçip hesapla.</p></div>
+    </section>
+
+    <!-- 4. KAZANCIM -->
+    <section class="sekme" id="kazanc">
+      <div class="kart">
+        <h2>Kazancım</h2>
+        <div class="istatistik">
+          <div><b id="topIs">0</b><span>iş kaydırıldı</span></div>
+          <div><b id="topGram">0 g</b><span>CO₂ önlendi</span></div>
+          <div><b id="topSeri">0</b><span>günlük seri</span></div>
+        </div>
+        <div id="topKarsilik" class="karsilik"></div>
+      </div>
+      <div class="kart">
+        <h2>Rozetler</h2>
+        <div class="rozetler" id="rozetler"></div>
+      </div>
+    </section>
+
+    <!-- 5. AYARLAR -->
+    <section class="sekme" id="ayarlar">
+      <div class="kart">
+        <h2>Gemini API anahtarı</h2>
+        <p class="alt">Önerinin sade Türkçe açıklaması için kullanılır. Anahtar yalnızca bu tarayıcıda saklanır.
+          <a href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer">Anahtar al →</a></p>
+        <form id="anahtarForm" class="satir">
+          <input id="anahtarInput" type="password" placeholder="AIza…" autocomplete="off" />
+          <button type="submit">Kaydet</button>
+        </form>
+        <p class="durum" id="anahtarDurum"></p>
+      </div>
+      <div class="kart">
+        <h2>Nasıl hesaplanıyor?</h2>
+        <p class="alt">Yenilenebilir pay = 8 + (radyasyon/900 × 38) + (min(rüzgâr,40)/40 × 35), %3–90 arası.<br />
+          Emisyon yoğunluğu = 700 − 6 × pay (g CO₂/kWh).<br />
+          Hava verisi: Open-Meteo. Değerler tahmindir, gerçek üretim verisi değildir.</p>
+        <button class="ikincil" id="sifirlaBtn">Kazanç verilerimi sıfırla</button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="alt-menu">
+    <button data-sekme="planla" class="aktif">🗓️<span>Planla</span></button>
+    <button data-sekme="cizelge">📊<span>Çizelge</span></button>
+    <button data-sekme="oneri">💡<span>Öneri</span></button>
+    <button data-sekme="kazanc">🏆<span>Kazancım</span></button>
+    <button data-sekme="ayarlar">⚙️<span>Ayarlar</span></button>
+  </nav>
+
+  <script src="hesap.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
